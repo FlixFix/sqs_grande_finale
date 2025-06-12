@@ -131,9 +131,20 @@ jobs:
       - name: Start CI docker containers
         run: docker compose -f "./playwright_2/backend/docker-compose.yaml" up -d --build --wait --wait-timeout 30
 
+      - name: Start backend JAR
+        run: java -jar ./playwright_2/backend/target/backend-0.0.1-SNAPSHOT.jar &
+
       - name: Install frontend dependencies
         working-directory: ./playwright_2/frontend
         run: npm install
+
+      - name: Build frontend
+        working-directory: ./playwright_2/frontend
+        run: npm run build
+
+      - name: Serve production frontend
+        working-directory: ./playwright_2/frontend
+        run: npx serve dist --listen 5173 &
 
       - name: Install Playwright and wait-on
         working-directory: ./playwright_2/testing
@@ -141,13 +152,6 @@ jobs:
           npm install
           npx playwright install --with-deps
           npm install wait-on
-
-      - name: Start backend JAR
-        run: java -jar ./playwright_2/backend/target/backend-0.0.1-SNAPSHOT.jar &
-
-      - name: Start frontend
-        working-directory: ./playwright_2/frontend
-        run: npm run dev &
 
       - name: Wait for frontend to become available
         working-directory: ./playwright_2/testing
