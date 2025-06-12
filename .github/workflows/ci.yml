@@ -124,10 +124,9 @@ jobs:
         with:
           node-version: 22
 
-      - name: Download backend build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: build-artifact
+      - name: Build backend (skip tests)
+        working-directory: ./playwright_2/backend
+        run: mvn clean package -DskipTests
 
       - name: Start CI docker containers
         run: docker compose -f "./playwright_2/backend/docker-compose.yaml" up -d --build --wait --wait-timeout 30
