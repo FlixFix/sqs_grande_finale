@@ -63,4 +63,19 @@ public class BookController {
     public void lend(@PathVariable Long id) {
         service.lendBook(id);
     }
+
+    @Operation(summary = "Search books by title", description = "Returns books whose titles contain the given query string (case-insensitive).")
+    @ApiResponse(
+            responseCode = "200",
+            description = "List of matching books returned successfully",
+            content = @Content(
+                    mediaType = "application/json",
+                    array = @ArraySchema(schema = @Schema(implementation = BookDto.class))
+            )
+    )
+    @GetMapping("/search")
+    public List<BookDto> searchBooks(@RequestParam("q") String query) {
+        return service.searchBooksByTitle(query);
+    }
+
 }

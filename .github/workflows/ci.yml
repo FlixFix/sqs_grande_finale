@@ -19,7 +19,7 @@ jobs:
           cache: 'maven'
 
       - name: Maven Build (without tests)
-        working-directory: ./playwright_2
+        working-directory: ./playwright_2/backend
         run: mvn clean package -DskipTests
 
       - name: Upload build artifacts
@@ -27,7 +27,7 @@ jobs:
         with:
           name: build-artifact
           path: |
-            playwright_2/target/*.jar
+            playwright_2/backend/target/*.jar
 
   run-mockito-tests:
     name: Run mockito tests
@@ -50,7 +50,7 @@ jobs:
           name: build-artifact
 
       - name: Run mockito test
-        working-directory: ./playwright_2
+        working-directory: ./playwright_2/backend
         run: mvn test -Dtest=MockitoLibraryTest
 
   run-db-tests:
@@ -74,10 +74,10 @@ jobs:
           name: build-artifact
 
       - name: Start CI docker containers
-        run: docker compose -f "./playwright_2/docker-compose.yaml" up -d --build --wait --wait-timeout 30
+        run: docker compose -f "./playwright_2/backend/docker-compose.yaml" up -d --build --wait --wait-timeout 30
 
       - name: Run integration test with docker environment
-        working-directory: ./playwright_2
+        working-directory: ./playwright_2/backend
         run: mvn test -Dtest=ManualLibraryTest
 
   run-container-tests:
@@ -101,5 +101,5 @@ jobs:
           name: build-artifact
 
       - name: Run Spring Boot test with testcontainers
-        working-directory: ./playwright_2
+        working-directory: ./playwright_2/backend
         run: mvn test -Dtest=TestContainersLibraryTest

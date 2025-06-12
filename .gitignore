@@ -5,3 +5,8 @@ venv/
 /loadtest_3/target/
 /playwright_2/target/
 /slightly-brittle-webshop/target/
+/playwright_2/frontend/node/
+/playwright_2/frontend/node_modules/
+/playwright_2/frontend/src/generated-sources/
+/playwright_2/backend/target/
+/playwright_2/frontend/target/

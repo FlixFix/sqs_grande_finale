@@ -34,4 +34,9 @@ public class BookStoragePort {
         var updatedBook = bookMapper.toEntity(book);
         bookRepository.save(updatedBook);
     }
+
+    public List<BookDto> findByTitle(String query) {
+        var foundBooks = bookRepository.findByTitleContainingIgnoreCase(query);
+        return bookMapper.toBoList(foundBooks);
+    }
 }

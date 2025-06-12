@@ -25,4 +25,8 @@ public class LibraryService {
         book.setLent(true);
         storagePort.save(book);
     }
+
+    public List<BookDto> searchBooksByTitle(String query) {
+        return storagePort.findByTitle(query);
+    }
 }

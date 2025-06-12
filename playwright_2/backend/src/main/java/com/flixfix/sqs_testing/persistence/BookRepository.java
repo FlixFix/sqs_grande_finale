@@ -10,5 +10,7 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
     List<BookEntity> findByLentFalse();
 
     List<BookEntity> findByLentTrue();
+
+    List<BookEntity> findByTitleContainingIgnoreCase(String query);
 }
 
