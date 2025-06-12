@@ -103,3 +103,61 @@ jobs:
       - name: Run Spring Boot test with testcontainers
         working-directory: ./playwright_2/backend
         run: mvn test -Dtest=TestContainersLibraryTest
+
+  run-playwright-tests:
+    name: Run Playwright UI Tests
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Download backend build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifact
+
+      - name: Install frontend dependencies
+        working-directory: ./playwright_2/frontend
+        run: npm install
+
+      - name: Install Playwright and wait-on
+        working-directory: ./playwright_2/testing
+        run: |
+          npm install
+          npx playwright install --with-deps
+          npm install wait-on
+
+      - name: Start backend JAR
+        run: java -jar ./playwright_2/backend/target/*.jar &
+
+      - name: Start frontend
+        working-directory: ./playwright_2/frontend
+        run: npm run dev &
+
+      - name: Wait for frontend to become available
+        working-directory: ./playwright_2/testing
+        run: npx wait-on http://localhost:5173
+
+      - name: Run Playwright tests
+        working-directory: ./playwright_2/testing
+        run: npx playwright test --reporter=dot
+
+      - name: Upload Playwright test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright_2/testing/test-results/
