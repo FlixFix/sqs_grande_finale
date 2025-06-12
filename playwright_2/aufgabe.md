@@ -1,4 +1,4 @@
-# 📘 Playwright E2E Setup-Anleitung für `playwright_2/testing`
+# Playwright E2E Setup-Anleitung für `playwright_2/testing`
 
 Diese Anleitung beschreibt Schritt für Schritt, wie Playwright mit TypeScript für End-to-End-Tests in eurem Projekt eingerichtet wird. Die Tests werden im Verzeichnis `playwright_2/testing` abgelegt.
 
@@ -110,7 +110,7 @@ test('should show page title', async ({ page }) => {
 });
 ```
 
-### 📌 Hinweis:
+### Hinweis:
 - Die Seite muss bereits über `npm run dev` im Frontend verfügbar sein.
 - Der Test prüft, ob der Haupttitel korrekt angezeigt wird.
 
@@ -133,7 +133,7 @@ Jetzt könnt ihr mit weiteren Tests beginnen, z.B. um die Buchlisten und Suchfun
 
 Damit die Playwright-Tests automatisch in der CI (GitHub Actions) ausgeführt werden, erweitere deinen Workflow um einen neuen Job `run-playwright-tests`.
 
-### ✨ Verwendete Kernfunktionen:
+### Verwendete Kernfunktionen:
 
 | Funktion                      | Beschreibung                                                   |
 |------------------------------|----------------------------------------------------------------|
@@ -208,4 +208,4 @@ run-playwright-tests:
 
 ---
 
-💡 **Tipp**: Wenn der Github Workflow durchgelaufen ist, könnt ihr den HTML-Testreport im GitHub UI als Artefakt herunterladen und lokal öffnen (`index.html`).
+ **Tipp**: Wenn der Github Workflow durchgelaufen ist, könnt ihr den HTML-Testreport im GitHub UI als Artefakt herunterladen und lokal öffnen (`index.html`).
