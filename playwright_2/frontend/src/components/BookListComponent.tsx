@@ -12,7 +12,7 @@ const BookList: React.FC<Props> = ({ books, title, onLend }) => (
         <h2>{title}</h2>
         <ul>
             {books.map((book) => (
-                <li key={book.id}>
+                <li key={book.id} data-testid={`book-${book.id}`}>
                     {book.title}
                     {onLend && (
                         <button onClick={() => onLend(book.id)} style={{ marginLeft: '1rem' }}>

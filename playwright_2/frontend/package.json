@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run generate && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "generate": "openapi-generator-cli generate -i ./openapi.yaml -o src/generated-sources/openapi -g typescript-axios --additional-properties=supportsES6=true,typescriptThreePlus=true,enumPropertyNaming=UPPERCASE,withSeparateModelsAndApi=true,apiPackage=api,modelPackage=model,typeMappings=set=Array",

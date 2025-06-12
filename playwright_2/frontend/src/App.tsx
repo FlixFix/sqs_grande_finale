@@ -84,7 +84,7 @@ function App() {
                     <BookList books={lentBooks} title="Lent Books" />
                 </div>
                 {searchResults.length > 0 && (
-                    <div className="book-column">
+                    <div className="book-column" data-testid="search-results">
                         <BookList books={searchResults} title={`Search Results for "${searchQuery}"`} />
                     </div>
                 )}

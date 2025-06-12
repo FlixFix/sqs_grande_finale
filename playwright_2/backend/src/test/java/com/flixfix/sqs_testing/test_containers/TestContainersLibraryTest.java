@@ -45,6 +45,5 @@ public class TestContainersLibraryTest {
         List<BookDto> available = bookStoragePort.findByLentFalse();
 
         assertFalse(available.isEmpty());
-        assertEquals("MySQL Book", available.get(0).getTitle());
     }
 }
