@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    name: Build mit Maven
+    name: Build with Maven
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -19,6 +19,7 @@ jobs:
           cache: 'maven'
 
       - name: Maven Build (without tests)
+        working-directory: ./playwright_2
         run: mvn clean package -DskipTests
 
       - name: Upload build artifacts
@@ -26,7 +27,7 @@ jobs:
         with:
           name: build-artifact
           path: |
-            target/*.jar
+            playwright_2/target/*.jar
 
   run-mockito-tests:
     name: Run mockito tests
@@ -49,13 +50,13 @@ jobs:
           name: build-artifact
 
       - name: Run mockito test
+        working-directory: ./playwright_2
         run: mvn test -Dtest=MockitoLibraryTest
 
   run-db-tests:
     name: Run tests with self started database
     needs: build
     runs-on: ubuntu-latest
-    
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -73,9 +74,10 @@ jobs:
           name: build-artifact
 
       - name: Start CI docker containers
-        run: docker compose -f "./compose.yaml" up -d --build --wait --wait-timeout 30
+        run: docker compose -f "./playwright/docker-compose.yaml" up -d --build --wait --wait-timeout 30
 
       - name: Run integration test with docker environment
+        working-directory: ./playwright_2
         run: mvn test -Dtest=ManualLibraryTest
 
   run-container-tests:
@@ -99,4 +101,5 @@ jobs:
           name: build-artifact
 
       - name: Run Spring Boot test with testcontainers
+        working-directory: ./playwright_2
         run: mvn test -Dtest=TestContainersLibraryTest

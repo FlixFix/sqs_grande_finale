@@ -2,3 +2,6 @@
 .idea/
 .vscode/
 venv/
+/loadtest_3/target/
+/playwright_2/target/
+/slightly-brittle-webshop/target/
