@@ -127,7 +127,7 @@ Projektseite z. B.: `https://dein-projekt.readthedocs.io/en/latest/`
 
 Je nach verwendeter Programmiersprache gibt es bereits OpenAPI Generatoren, die euch automatisiert OpenAPI Spezifikationen basierend auf euren Rest-Controllern erzeugen.
 Wenn dein Backend z. B. mit Spring Boot (wie hier im Beispielprojekt) arbeitet und Swagger/OpenAPI nutzt, kannst du die API-Dokumentation so exportieren. WICHTIG: Dazu muss deine Anwendung laufen.
-Baue und starte also zuerst die Anwendung im Order `playwright_2`:
+Baue und starte also zuerst die Anwendung im Ordner `playwright_2`:
 
 ```shell
 cd playwright_2
